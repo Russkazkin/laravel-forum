@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace LaravelForum;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
