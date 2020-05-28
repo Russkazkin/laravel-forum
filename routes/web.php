@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use LaravelForum\Discussion;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +21,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('discussion', Discussion::class);
+Route::resource('discussion', 'DiscussionsController');
