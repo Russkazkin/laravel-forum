@@ -6,7 +6,7 @@
         <div class="card-header">Add Discussion</div>
 
         <div class="card-body">
-            <form action="{{ route('discussion.store') }}">
+            <form action="{{ route('discussion.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -14,7 +14,10 @@
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control" name="content" id="content" cols="5" rows="5"></textarea>
+
+                    <input id="content" value="Editor content goes here" type="hidden" name="content">
+                    <trix-editor input="content"></trix-editor>
+
                 </div>
                 <div class="form-group">
                     <label for="channel">Channel</label>
@@ -30,3 +33,10 @@
     </div>
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.css">
+@endsection
+
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.3/trix.min.js"></script>
+@endsection
