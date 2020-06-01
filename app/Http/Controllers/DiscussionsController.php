@@ -3,18 +3,28 @@
 namespace LaravelForum\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use LaravelForum\Discussion;
+use LaravelForum\Http\Requests\CreateDiscussionRequest;
 
 class DiscussionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('create', 'store', 'destroy', 'update', 'edit');
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        return view('discussions.index', [
+            'discussions' => Discussion::paginate(5),
+        ]);
     }
 
     /**
@@ -30,12 +40,21 @@ class DiscussionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateDiscussionRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(CreateDiscussionRequest $request)
     {
-        //
+        auth()->user()->discussions()->create([
+            'title' => $request['title'],
+            'slug' => Str::slug($request['title']),
+            'content' => $request['content'],
+            'channel_id' => $request['channel'],
+        ]);
+
+        session()->flash('success', 'Discussion posted.');
+
+        return redirect()->route('discussion.index');
     }
 
     /**
