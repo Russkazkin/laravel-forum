@@ -6,7 +6,9 @@
         @include('partials.discussion-header')
 
         <div class="card-body">
-            {{ $discussion->title }}
+            <div class="text-center">
+                <b>{{ $discussion->title }}</b>
+            </div>
         </div>
     </div>
     @endforeach
