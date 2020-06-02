@@ -17,7 +17,7 @@
         </div>
 
         <div class="card-body">
-           {!! $discussion->content !!}
+            {{ $discussion->title }}
         </div>
     </div>
     @endforeach
