@@ -4,7 +4,7 @@
     @foreach($discussions as $discussion)
     <div class="card mb-3">
         <div class="card-header">
-            <img src="" alt="">
+            <img src="{{ Gravatar::src($discussion->user->email) }}" alt="">
         </div>
 
         <div class="card-body">
