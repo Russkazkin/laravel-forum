@@ -61,11 +61,11 @@ class DiscussionsController extends Controller
      * Display the specified resource.
      *
      * @param  \LaravelForum\Discussion  $discussion
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Discussion $discussion)
     {
-        dd($discussion);
+        return view('discussions.show', ['discussion' => $discussion]);
     }
 
     /**
