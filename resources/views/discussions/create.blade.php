@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @include('partials.errors')
     <div class="card">
         <div class="card-header">Add Discussion</div>
 
@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label for="content">Content</label>
 
-                    <input id="content" value="Editor content goes here" type="hidden" name="content">
+                    <input id="content" value="" type="hidden" name="content">
                     <trix-editor input="content"></trix-editor>
 
                 </div>
