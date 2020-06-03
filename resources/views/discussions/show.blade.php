@@ -13,6 +13,7 @@
             {!! $discussion->content !!}
         </div>
     </div>
+    @auth
     <div class="card my-5">
         <div class="card-header">
             Add a reply
@@ -22,9 +23,13 @@
                 @csrf
                 <input type="hidden" name="reply" id="reply">
                 <trix-editor input="reply"></trix-editor>
+                <button type="submit" class="btn btn-success btn-sm mt-2">Add Reply</button>
             </form>
         </div>
     </div>
+    @else
+        <a href="{{ route('login') }}" class="btn btn-info" style="color: white">Sign in to add a reply</a>
+    @endauth
 @endsection
 
 @section('css')
