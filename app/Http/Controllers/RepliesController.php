@@ -3,6 +3,8 @@
 namespace LaravelForum\Http\Controllers;
 
 use Illuminate\Http\Request;
+use LaravelForum\Discussion;
+use LaravelForum\Http\Requests\CreateReplyRequest;
 use LaravelForum\Reply;
 
 class RepliesController extends Controller
@@ -30,12 +32,20 @@ class RepliesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateReplyRequest $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateReplyRequest $request, Discussion $discussion)
     {
-        //
+        auth()->user()->replies()->create([
+            'discussion_id' => $discussion->id,
+            'content' => $request->content,
+        ]);
+
+        session()->flash('success', 'Reply added.');
+
+        return redirect()->route('discussions.show', $discussion->id);
     }
 
     /**
