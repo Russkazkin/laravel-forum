@@ -40,7 +40,7 @@ class RepliesController extends Controller
     {
         auth()->user()->replies()->create([
             'discussion_id' => $discussion->id,
-            'content' => $request->content,
+            'content' => $request['content'],
         ]);
 
         session()->flash('success', 'Reply added.');
