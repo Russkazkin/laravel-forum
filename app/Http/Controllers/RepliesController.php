@@ -45,7 +45,7 @@ class RepliesController extends Controller
 
         session()->flash('success', 'Reply added.');
 
-        return redirect()->route('discussions.show', $discussion->id);
+        return redirect()->route('discussions.show', $discussion->slug);
     }
 
     /**
