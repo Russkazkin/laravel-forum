@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use LaravelForum\Discussion;
 use LaravelForum\Http\Requests\CreateDiscussionRequest;
+use LaravelForum\Reply;
 
 class DiscussionsController extends Controller
 {
@@ -100,5 +101,12 @@ class DiscussionsController extends Controller
     public function destroy(Discussion $discussion)
     {
         //
+    }
+
+    public function reply(Discussion $discussion, Reply $reply)
+    {
+        $discussion->markAsBestReply($reply);
+
+        session()->flash('success', 'Marked as best reply');
     }
 }
