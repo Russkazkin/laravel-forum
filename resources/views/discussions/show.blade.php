@@ -13,23 +13,6 @@
             {!! $discussion->content !!}
         </div>
     </div>
-    @auth
-    <div class="card my-5">
-        <div class="card-header">
-            Add a reply
-        </div>
-        <div class="card-body">
-            <form action="{{ route('replies.store', $discussion->slug) }}" method="POST">
-                @csrf
-                <input type="hidden" name="content" id="content">
-                <trix-editor input="content"></trix-editor>
-                <button type="submit" class="btn btn-success btn-sm mt-2">Add Reply</button>
-            </form>
-        </div>
-    </div>
-    @else
-        <a href="{{ route('login') }}" class="btn btn-info" style="color: white">Sign in to add a reply</a>
-    @endauth
 
     @foreach($discussion->replies()->paginate(3) as $reply)
         <div class="card my-5">
@@ -47,6 +30,23 @@
         </div>
     @endforeach
     {{ $discussion->replies()->paginate(3)->links() }}
+    @auth
+        <div class="card my-5">
+            <div class="card-header">
+                Add a reply
+            </div>
+            <div class="card-body">
+                <form action="{{ route('replies.store', $discussion->slug) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="content" id="content">
+                    <trix-editor input="content"></trix-editor>
+                    <button type="submit" class="btn btn-success btn-sm mt-2">Add Reply</button>
+                </form>
+            </div>
+        </div>
+    @else
+        <a href="{{ route('login') }}" class="btn btn-info" style="color: white">Sign in to add a reply</a>
+    @endauth
 @endsection
 
 @section('css')
