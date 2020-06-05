@@ -15,12 +15,15 @@
     </div>
 
     @foreach($discussion->replies()->paginate(3) as $reply)
-        <div class="card my-5">
+        <div class="card my-3">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <img src="{{ Gravatar::src($reply->owner->email) }}" width="40" alt="" style="border-radius: 50%">
                         <span class="ml-2">{{ $reply->owner->name }}</span>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Mark as best reply</button>
                     </div>
                 </div>
             </div>
