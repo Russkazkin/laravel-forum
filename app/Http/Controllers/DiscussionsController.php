@@ -108,5 +108,7 @@ class DiscussionsController extends Controller
         $discussion->markAsBestReply($reply);
 
         session()->flash('success', 'Marked as best reply');
+
+        return redirect()->back();
     }
 }

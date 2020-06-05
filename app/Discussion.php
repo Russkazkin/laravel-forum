@@ -24,7 +24,5 @@ class Discussion extends Model
         $this->update([
             'reply_id' => $reply->id,
         ]);
-
-        return redirect()->back();
     }
 }
