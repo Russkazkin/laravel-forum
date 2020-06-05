@@ -25,4 +25,9 @@ class Discussion extends Model
             'reply_id' => $reply->id,
         ]);
     }
+
+    public function bestReply()
+    {
+        return $this->belongsTo(Reply::class, 'reply_id');
+    }
 }

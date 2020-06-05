@@ -18,6 +18,16 @@
             </div>
             <hr>
             {!! $discussion->content !!}
+            @if($discussion->bestReply)
+                <div class="card bg-success my-4" style="color: white">
+                    <div class="card-header">
+                        Best reply
+                    </div>
+                    <div class="card-body">
+                        {!! $discussion->bestReply->content !!}
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
