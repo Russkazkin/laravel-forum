@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use LaravelForum\Discussion;
 
 class NewReplyAdded extends Notification
 {
     use Queueable;
 
+    public $discussion;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Discussion $discussion
      */
-    public function __construct()
+    public function __construct(Discussion $discussion)
     {
-        //
+        $this->discussion = $discussion;
     }
 
     /**
@@ -41,8 +44,8 @@ class NewReplyAdded extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('A new reply was added to your discussion.')
+                    ->action('View Discussion', route('discussions.show', $this->discussion->slug))
                     ->line('Thank you for using our application!');
     }
 
