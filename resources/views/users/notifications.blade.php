@@ -14,7 +14,7 @@
                                 <b>"{{ $notification->data['discussion']['title'] }}"</b>
                             </div>
                             <div>
-                                <a href="" class="btn btn-sm btn-info color-white">
+                                <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}" class="btn btn-sm btn-info color-white">
                                     View discussion
                                 </a>
                             </div>

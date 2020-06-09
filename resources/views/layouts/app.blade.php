@@ -41,14 +41,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                        <li class="nav-item">
-                            <a href="{{ route('users.notifications') }}" class="nav-link">
-                                <span class="badge badge-info color-white">
-                                    {{ auth()->user()->unreadNotifications->count() }}
-                                    Unread notifications
-                                </span>
-                            </a>
-                        </li>
+                            @if(auth()->user()->unreadNotifications->count())
+                                <li class="nav-item">
+                                    <a href="{{ route('users.notifications') }}" class="nav-link">
+                                        <span class="badge badge-info color-white">
+                                            {{ auth()->user()->unreadNotifications->count() }}
+                                            Unread notifications
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
                         @endauth
                     </ul>
 
