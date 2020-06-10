@@ -57,7 +57,7 @@ class Discussion extends Model
             'reply_id' => $reply->id,
         ]);
 
-        $reply->owner->notify(new ReplyMarkedAsBestReply());
+        $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 
     public function bestReply()

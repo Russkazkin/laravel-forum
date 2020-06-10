@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use LaravelForum\Discussion;
 
 class ReplyMarkedAsBestReply extends Notification
 {
     use Queueable;
 
+    public $discussion;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Discussion $discussion
      */
-    public function __construct()
+    public function __construct(Discussion $discussion)
     {
-        //
+        $this->discussion = $discussion;
     }
 
     /**
@@ -29,7 +32,7 @@ class ReplyMarkedAsBestReply extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -41,8 +44,8 @@ class ReplyMarkedAsBestReply extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('Your reply was marked as best reply.')
+                    ->action('View discussion', route('discussions.show', $this->discussion->slug))
                     ->line('Thank you for using our application!');
     }
 
@@ -55,7 +58,7 @@ class ReplyMarkedAsBestReply extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'discussion' => $this->discussion,
         ];
     }
 }
