@@ -19,6 +19,16 @@
                                 </a>
                             </div>
                         @endif
+                            @if($notification->type == 'LaravelForum\Notifications\ReplyMarkedAsBestReply')
+                                <div>
+                                    Your reply to the discussion <b>"{{ $notification->data['discussion']['title'] }}"</b> was marked as best
+                                </div>
+                                <div>
+                                    <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}" class="btn btn-sm btn-info color-white">
+                                        View discussion
+                                    </a>
+                                </div>
+                            @endif
                     </li>
                 @endforeach
             </ul>
