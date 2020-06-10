@@ -60,6 +60,21 @@ class Discussion extends Model
         $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 
+    public function scopeFilterByChannels($builder)
+    {
+        /**
+         * @var $channel Channel
+         */
+        if (request()->query('channel')){
+            $channel = Channel::where('slug', request()->query('channel'))->first();
+            if($channel) {
+                return $builder->where('channel_id', $channel->id);
+            }
+            return $builder;
+        }
+        return $builder;
+    }
+
     public function bestReply()
     {
         return $this->belongsTo(Reply::class, 'reply_id');
