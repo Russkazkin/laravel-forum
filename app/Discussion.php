@@ -57,6 +57,10 @@ class Discussion extends Model
             'reply_id' => $reply->id,
         ]);
 
+        if($reply->owner->id == $this->author->id) {
+            return;
+        }
+
         $reply->owner->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 
